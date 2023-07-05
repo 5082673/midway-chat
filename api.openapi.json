@@ -1,0 +1,4236 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "聊天api",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "聊天"
+    },
+    {
+      "name": "群组"
+    },
+    {
+      "name": "群组/群公告"
+    },
+    {
+      "name": "群组/群成员"
+    },
+    {
+      "name": "用户"
+    },
+    {
+      "name": "好友"
+    }
+  ],
+  "paths": {
+    "/ws/chat": {
+      "get": {
+        "summary": "初始化socket",
+        "x-apifox-folder": "",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "头哥",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49213373-run"
+      }
+    },
+    "/api/chat/sendMsg": {
+      "post": {
+        "summary": "发送消息",
+        "x-apifox-folder": "聊天",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "聊天"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "groupId": {
+                    "type": "string",
+                    "description": "群组id",
+                    "example": "63b413b541879ae682da0676"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "消息内容",
+                    "example": "头哥无敌"
+                  },
+                  "msgType": {
+                    "type": "string",
+                    "description": "消息类型 text => 文字; image => 图片; mp4 => 视频; mp3 => 音频; voice => 语音; word => 文档; file => 附件 goods => 商品 order => 订单",
+                    "example": "text"
+                  }
+                },
+                "required": [
+                  "groupId",
+                  "content",
+                  "msgType"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "createTime": {
+                          "type": "integer"
+                        },
+                        "updateTime": {
+                          "type": "integer"
+                        },
+                        "sendUserId": {
+                          "type": "string",
+                          "description": "发送人id"
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "description": "群组id"
+                        },
+                        "msgType": {
+                          "type": "string",
+                          "description": "消息类型"
+                        },
+                        "content": {
+                          "type": "string",
+                          "description": "消息"
+                        },
+                        "readType": {
+                          "type": "integer",
+                          "description": "已读未读"
+                        },
+                        "withdrawType": {
+                          "type": "integer",
+                          "description": "已撤回未撤回"
+                        },
+                        "status": {
+                          "type": "integer"
+                        },
+                        "read_child_list": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "已读人员列表"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "createTime",
+                        "updateTime",
+                        "sendUserId",
+                        "groupId",
+                        "msgType",
+                        "content",
+                        "readType",
+                        "withdrawType",
+                        "status",
+                        "read_child_list",
+                        "id"
+                      ],
+                      "x-apifox-orders": [
+                        "createTime",
+                        "updateTime",
+                        "sendUserId",
+                        "groupId",
+                        "msgType",
+                        "content",
+                        "readType",
+                        "withdrawType",
+                        "status",
+                        "read_child_list",
+                        "id"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "createTime": 1673506282601,
+                        "updateTime": 1673506282601,
+                        "sendUserId": "1",
+                        "groupId": "63b413b541879ae682da0676",
+                        "msgType": "text",
+                        "content": "内容",
+                        "readType": 0,
+                        "withdrawType": 0,
+                        "status": 0,
+                        "read_child_list": [],
+                        "id": "63bfadeadd2cd72e030b2a98"
+                      },
+                      "msg": "发送成功"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49214378-run"
+      }
+    },
+    "/api/group/getFirstGroupId": {
+      "get": {
+        "summary": "首次单聊获取群组id（无好友关系需求时使用）",
+        "x-apifox-folder": "聊天",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "若项目没有先加好友 后聊天的逻辑，可用此接口获取群组id",
+        "tags": [
+          "聊天"
+        ],
+        "parameters": [
+          {
+            "name": "ascriptionId",
+            "in": "query",
+            "description": "接受消息人的userid",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "群组id"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "description": "创建人id"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "user_id"
+                      ],
+                      "x-apifox-orders": [
+                        "id",
+                        "user_id"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "id": "63bfafdf8da65ba5c1a8f476",
+                        "user_id": "2"
+                      },
+                      "msg": "请求成功"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49214863-run"
+      }
+    },
+    "/api/chat/getOffLineMsgList": {
+      "get": {
+        "summary": "获取历史消息记录",
+        "x-apifox-folder": "聊天",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "聊天"
+        ],
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "群组id",
+            "required": true,
+            "example": "63b413b541879ae682da0676",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "当前页数",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页条数",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "createTime": {
+                            "type": "integer"
+                          },
+                          "updateTime": {
+                            "type": "integer"
+                          },
+                          "sendUserId": {
+                            "type": "string",
+                            "description": "发送人id"
+                          },
+                          "groupId": {
+                            "type": "string",
+                            "description": "群组id"
+                          },
+                          "msgType": {
+                            "type": "string",
+                            "description": "消息类型"
+                          },
+                          "content": {
+                            "type": "string",
+                            "description": "消息"
+                          },
+                          "readType": {
+                            "type": "integer",
+                            "description": "已读未读"
+                          },
+                          "withdrawType": {
+                            "type": "integer",
+                            "description": "已撤回未撤回"
+                          },
+                          "status": {
+                            "type": "integer"
+                          },
+                          "read_child_list": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "已读人员列表"
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "createTime",
+                          "updateTime",
+                          "sendUserId",
+                          "groupId",
+                          "msgType",
+                          "content",
+                          "readType",
+                          "withdrawType",
+                          "status",
+                          "read_child_list",
+                          "id"
+                        ],
+                        "x-apifox-orders": [
+                          "createTime",
+                          "updateTime",
+                          "sendUserId",
+                          "groupId",
+                          "msgType",
+                          "content",
+                          "readType",
+                          "withdrawType",
+                          "status",
+                          "read_child_list",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "count",
+                    "page",
+                    "limit"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg",
+                    "count",
+                    "page",
+                    "limit"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": [
+                        {
+                          "createTime": 1673506282601,
+                          "updateTime": 1673506282601,
+                          "sendUserId": "1",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "头哥无敌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bfadeadd2cd72e030b2a98"
+                        },
+                        {
+                          "createTime": 1673502489630,
+                          "updateTime": 1673502489630,
+                          "sendUserId": "3",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "我司您跌1",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bf9f192324a9fcc5c37c2b"
+                        },
+                        {
+                          "createTime": 1673502081398,
+                          "updateTime": 1673502081398,
+                          "sendUserId": "3",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "我司您跌1",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bf9d81c107302d23c83e0d"
+                        },
+                        {
+                          "createTime": 1673501749779,
+                          "updateTime": 1673501749779,
+                          "sendUserId": "3",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "我司您跌1",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bf9c3583024b6e215c7430"
+                        },
+                        {
+                          "createTime": 1673501103741,
+                          "updateTime": 1673501103741,
+                          "sendUserId": "3",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "我司您跌1",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bf99afb0dd8ee7085a245b"
+                        },
+                        {
+                          "createTime": 1673501060791,
+                          "updateTime": 1673501060791,
+                          "sendUserId": "3",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "我司您跌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63bf9984b0dd8ee7085a2457"
+                        },
+                        {
+                          "createTime": 1673422781752,
+                          "updateTime": 1673422781752,
+                          "sendUserId": "1",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "头哥无敌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63be67bdf066aa1e7fb43a8c"
+                        },
+                        {
+                          "createTime": 1673422718319,
+                          "updateTime": 1673422718319,
+                          "sendUserId": "2",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "头哥无敌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63be677e99de00d72e0a6b90"
+                        },
+                        {
+                          "createTime": 1673422488471,
+                          "updateTime": 1673422488471,
+                          "sendUserId": "2",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "头哥无敌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63be66982019a09b723ae90f"
+                        },
+                        {
+                          "createTime": 1673421954684,
+                          "updateTime": 1673421954684,
+                          "sendUserId": "2",
+                          "groupId": "63b413b541879ae682da0676",
+                          "msgType": "text",
+                          "content": "头哥无敌",
+                          "readType": 0,
+                          "withdrawType": 0,
+                          "status": 0,
+                          "read_child_list": [],
+                          "id": "63be6482d54cc02cb1edcf21"
+                        }
+                      ],
+                      "msg": "请求成功",
+                      "count": 35,
+                      "page": 1,
+                      "limit": 10
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49225845-run"
+      }
+    },
+    "/api/chat/withdrawMsg": {
+      "get": {
+        "summary": "撤回消息",
+        "x-apifox-folder": "聊天",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "聊天"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "消息id",
+            "required": true,
+            "example": "u2jLR4yQQ4derHd7wUowRtnX1ST9eNTS",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws群组推送",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "2",
+                        "id": "63c66c9f7c4fdd9170e6fc27",
+                        "time": 1673948435588,
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "withdrawGroupMsg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49241069-run"
+      }
+    },
+    "/api/chat/readMsg": {
+      "post": {
+        "summary": "已读消息",
+        "x-apifox-folder": "聊天",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "建议将多条未读消息id 组成 数组.join(',') 传入，以节省服务器资源",
+        "tags": [
+          "聊天"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ids": {
+                    "type": "string",
+                    "description": "消息id 以,分割",
+                    "example": "asdasdasd123123,asdasdasd123123,asdasdasd123123"
+                  }
+                },
+                "required": [
+                  "ids"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws单聊推送",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "ids": [
+                          {
+                            "id": "63c66d597c4fdd9170e6fc3d",
+                            "groupId": "63b4164b9c0289ed7b5f0f79"
+                          }
+                        ],
+                        "user_id": "3",
+                        "userData": {
+                          "user_id": "3",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673948607956
+                      },
+                      "sendType": "readMsg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49261531-run"
+      }
+    },
+    "/common/upload": {
+      "post": {
+        "summary": "上传文件",
+        "x-apifox-folder": "",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-49262474-run"
+      }
+    },
+    "/api/chat/test": {
+      "post": {
+        "summary": "测试接口",
+        "x-apifox-folder": "",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string",
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-50242522-run"
+      }
+    },
+    "/common/uploadOSS": {
+      "post": {
+        "summary": "上传oss",
+        "x-apifox-folder": "",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-55616367-run"
+      }
+    },
+    "/api/group/createGroup": {
+      "post": {
+        "summary": "创建群组",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "群组名称"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "description": "群头像"
+                  },
+                  "user_child_id": {
+                    "type": "string",
+                    "description": "群成员userid",
+                    "example": "1,2,3"
+                  }
+                },
+                "required": [
+                  "name",
+                  "user_child_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "createTime": {
+                          "type": "integer"
+                        },
+                        "updateTime": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string",
+                          "title": "",
+                          "description": "群名称"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "description": "群头像"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "description": "创建人id"
+                        },
+                        "admin_user_id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "群管理员ids"
+                        },
+                        "user_child_id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "群成员ids"
+                        },
+                        "user_child_list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "integer"
+                              },
+                              "updateTime": {
+                                "type": "integer"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "nick_name": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "createTime",
+                              "updateTime",
+                              "user_id",
+                              "nick_name",
+                              "id"
+                            ],
+                            "x-apifox-orders": [
+                              "createTime",
+                              "updateTime",
+                              "user_id",
+                              "nick_name",
+                              "id"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "description": "群成员列表"
+                        },
+                        "black_id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "黑名单/群禁言ids"
+                        },
+                        "remark": {
+                          "type": "string",
+                          "description": "最新公告"
+                        },
+                        "type": {
+                          "type": "integer",
+                          "description": "群类型 0单聊 1群聊 2客服"
+                        },
+                        "status": {
+                          "type": "integer",
+                          "description": "0正常 1禁用 2拉黑 3禁言"
+                        },
+                        "newsContentTime": {
+                          "type": "integer",
+                          "description": "最新消息时间戳"
+                        },
+                        "newsContent": {
+                          "type": "string",
+                          "description": "最新消息"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "createTime",
+                        "updateTime",
+                        "name",
+                        "avatar",
+                        "user_id",
+                        "admin_user_id",
+                        "user_child_id",
+                        "user_child_list",
+                        "black_id",
+                        "remark",
+                        "type",
+                        "status",
+                        "newsContentTime",
+                        "newsContent",
+                        "id"
+                      ],
+                      "x-apifox-orders": [
+                        "createTime",
+                        "updateTime",
+                        "name",
+                        "avatar",
+                        "user_id",
+                        "admin_user_id",
+                        "user_child_id",
+                        "user_child_list",
+                        "black_id",
+                        "remark",
+                        "type",
+                        "status",
+                        "newsContentTime",
+                        "newsContent",
+                        "id"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63c672c2129c267c076e9d73",
+                        "user_id": "2",
+                        "user_child_id": [
+                          "aa",
+                          "bb",
+                          "cc",
+                          "1",
+                          "dd",
+                          "ee"
+                        ],
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673949890444
+                      },
+                      "sendType": "groupCreate"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56806181-run"
+      }
+    },
+    "/api/user/login": {
+      "post": {
+        "summary": "登录",
+        "x-apifox-folder": "用户",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "用户"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56807360-run"
+      }
+    },
+    "/api/group/updGroup": {
+      "post": {
+        "summary": "修改群组信息",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "description": "头像"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "名称"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56807710-run"
+      }
+    },
+    "/api/group/groupAddUser": {
+      "post": {
+        "summary": "添加群成员",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "user_child_id": {
+                    "type": "string",
+                    "description": "要添加的群成员user_id"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_child_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws推送",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "a",
+                        "userData": {
+                          "user_id": "a",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673948940524
+                      },
+                      "sendType": "groupAddUser"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56843646-run"
+      }
+    },
+    "/api/group/groupDelUser": {
+      "post": {
+        "summary": "删除群成员",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "user_child_id": {
+                    "type": "string",
+                    "description": "删除的群组人员userid"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_child_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "a",
+                        "userData": {
+                          "user_id": "a",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673948975523
+                      },
+                      "sendType": "groupDelUser"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56869141-run"
+      }
+    },
+    "/api/group/groupSetAdmins": {
+      "post": {
+        "summary": "添加群管理员",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群id"
+                  },
+                  "user_child_id": {
+                    "type": "string",
+                    "description": "添加的群管理员id"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_child_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "a",
+                        "userData": {
+                          "user_id": "a",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673949009946
+                      },
+                      "sendType": "groupAddAdmin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56869323-run"
+      }
+    },
+    "/api/group/groupDelAdmins": {
+      "post": {
+        "summary": "删除群管理员",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群id"
+                  },
+                  "user_child_id": {
+                    "type": "string",
+                    "description": "删除的群管理员userid"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_child_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "a",
+                        "userData": {
+                          "user_id": "a",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673949167741
+                      },
+                      "sendType": "groupDelAdmin"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56870385-run"
+      }
+    },
+    "/api/group/groupSetRemark": {
+      "post": {
+        "summary": "设置群公告",
+        "x-apifox-folder": "群组/群公告",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群公告"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "群公告内容"
+                  },
+                  "type": {
+                    "type": "number",
+                    "description": "默认0； 0 通知所有群成员 1 不通知"
+                  }
+                },
+                "required": [
+                  "id",
+                  "remark"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws推送",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "remarkId": "63c66e267c4fdd9170e6fc99",
+                        "remark": "啦啦啦",
+                        "time": 1673948710571
+                      },
+                      "sendType": "groupSetRemark"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56878126-run"
+      }
+    },
+    "/api/group/remarkRead": {
+      "post": {
+        "summary": "群公告已读",
+        "x-apifox-folder": "群组/群公告",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群公告"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群公告id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws推送",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "remarkId": "63c66e9c6cf48ad0b1e692c3",
+                        "time": 1673948855466,
+                        "user_id": "3",
+                        "userData": {
+                          "user_id": "3",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupReadRemark"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56885907-run"
+      }
+    },
+    "/api/group/getRemarks": {
+      "get": {
+        "summary": "获取群公告列表",
+        "x-apifox-folder": "群组/群公告",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群公告"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "群组id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "createTime": {
+                            "type": "integer"
+                          },
+                          "updateTime": {
+                            "type": "integer"
+                          },
+                          "groupId": {
+                            "type": "string"
+                          },
+                          "remark": {
+                            "type": "string",
+                            "description": "公告内容"
+                          },
+                          "user_id": {
+                            "type": "string"
+                          },
+                          "user_child_list": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "createTime": {
+                                  "type": "integer"
+                                },
+                                "updateTime": {
+                                  "type": "integer"
+                                },
+                                "user_id": {
+                                  "type": "string"
+                                },
+                                "nick_name": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "avatar": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "createTime",
+                                "updateTime",
+                                "user_id",
+                                "nick_name",
+                                "name",
+                                "avatar",
+                                "id"
+                              ],
+                              "x-apifox-orders": [
+                                "createTime",
+                                "updateTime",
+                                "user_id",
+                                "nick_name",
+                                "name",
+                                "avatar",
+                                "id"
+                              ],
+                              "x-apifox-ignore-properties": []
+                            }
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "createTime",
+                          "updateTime",
+                          "groupId",
+                          "remark",
+                          "user_id",
+                          "user_child_list",
+                          "id"
+                        ],
+                        "x-apifox-orders": [
+                          "createTime",
+                          "updateTime",
+                          "groupId",
+                          "remark",
+                          "user_id",
+                          "user_child_list",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "count",
+                    "page",
+                    "limit"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg",
+                    "count",
+                    "page",
+                    "limit"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": [
+                        {
+                          "createTime": 1673421227869,
+                          "updateTime": 1673421227869,
+                          "groupId": "63b413b541879ae682da0676",
+                          "remark": "头哥是菜鸡2",
+                          "user_id": "1",
+                          "user_child_list": [
+                            {
+                              "createTime": 1673421239741,
+                              "updateTime": 1673421239742,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be61b7fbc19f5910a44685"
+                            },
+                            {
+                              "createTime": 1673421251135,
+                              "updateTime": 1673421251135,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be61c3fbc19f5910a44697"
+                            }
+                          ],
+                          "id": "63be61abfbc19f5910a4467a"
+                        },
+                        {
+                          "createTime": 1673421192542,
+                          "updateTime": 1673421192543,
+                          "groupId": "63b413b541879ae682da0676",
+                          "remark": "头哥是菜鸡1",
+                          "user_id": "1",
+                          "user_child_list": [],
+                          "id": "63be61885cf8f931374c0814"
+                        },
+                        {
+                          "createTime": 1673421052126,
+                          "updateTime": 1673421052126,
+                          "groupId": "63b413b541879ae682da0676",
+                          "remark": "头哥是菜鸡",
+                          "user_id": "1",
+                          "user_child_list": [],
+                          "id": "63be60fc6368893673b48e61"
+                        },
+                        {
+                          "createTime": 1672749799932,
+                          "updateTime": 1672749799932,
+                          "groupId": "63b413b541879ae682da0676",
+                          "remark": "dsadsa啊啊啊",
+                          "user_id": "1",
+                          "user_child_list": [
+                            {
+                              "createTime": 1672749932842,
+                              "updateTime": 1672749932842,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b4236cbd63b7201e45b36b"
+                            },
+                            {
+                              "createTime": 1672749996755,
+                              "updateTime": 1672749996755,
+                              "user_id": "3",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b423ace302036b7aca5452"
+                            },
+                            {
+                              "createTime": 1672750029104,
+                              "updateTime": 1672750029104,
+                              "user_id": "4",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b423cdca3ffb7ee42e60ea"
+                            },
+                            {
+                              "createTime": 1673420805105,
+                              "updateTime": 1673420805105,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be600537b6bdee5f81e27d"
+                            }
+                          ],
+                          "id": "63b422e73cfd5fbdbcb395e9"
+                        }
+                      ],
+                      "msg": "请求成功",
+                      "count": 4,
+                      "page": 1,
+                      "limit": 10
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56904519-run"
+      }
+    },
+    "/api/mail/mailAdd": {
+      "post": {
+        "summary": "发起好友申请",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_from_id": {
+                    "type": "string",
+                    "description": "对方user_id"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "备注，可为空"
+                  }
+                },
+                "required": [
+                  "user_from_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "remark": "asdasd",
+                        "user_id": "11111",
+                        "time": 1673950652308,
+                        "id": "63c675a8d842a73fa3bc2ccf",
+                        "userData": {
+                          "user_id": "11111",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailApplyAdd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56925234-run"
+      }
+    },
+    "/api/mail/agreeApplyMail": {
+      "post": {
+        "summary": "同意好友申请",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "user_id": "1111",
+                        "time": 1673950778223,
+                        "userData": {
+                          "user_id": "1111",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailAgreeApplyAdd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56953387-run"
+      }
+    },
+    "/api/mail/refuseApplyMail": {
+      "post": {
+        "summary": "拒绝好友申请",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "user_id": "aaaaaa",
+                        "time": 1674009475714,
+                        "userData": {
+                          "user_id": "aaaaaa",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailRefuseApplyAdd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56964743-run"
+      }
+    },
+    "/api/mail/getApplyMails": {
+      "get": {
+        "summary": "获取好友申请列表",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56965429-run"
+      }
+    },
+    "/api/mail/getMails": {
+      "get": {
+        "summary": "获取好友列表",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "deprecated",
+        "deprecated": true,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56966060-run"
+      }
+    },
+    "/api/mail/addBlackMail": {
+      "post": {
+        "summary": "拉黑好友",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "好友关系id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "user_id": "aaaa",
+                        "time": 1674009702307,
+                        "groupId": "63c75bc38f513580430d4b91",
+                        "userData": {
+                          "user_id": "aaaa",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailBlackAdd"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56967135-run"
+      }
+    },
+    "/api/mail/getBlackMails": {
+      "get": {
+        "summary": "获取黑名单列表",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56967624-run"
+      }
+    },
+    "/api/mail/delBlackMail": {
+      "post": {
+        "summary": "取消拉黑",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "user_id": "aaaa",
+                        "time": 1674009756529,
+                        "groupId": "63c75bc38f513580430d4b91",
+                        "userData": {
+                          "user_id": "aaaa",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailBlackDel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-56968281-run"
+      }
+    },
+    "/api/group/gatGroupList": {
+      "get": {
+        "summary": "获取群组列表",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "createTime": {
+                            "type": "integer"
+                          },
+                          "updateTime": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "群名称"
+                          },
+                          "avatar": {
+                            "type": "string",
+                            "description": "群头像"
+                          },
+                          "user_id": {
+                            "type": "string",
+                            "description": "创建人id"
+                          },
+                          "admin_user_id": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "管理员id"
+                          },
+                          "user_child_list": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "createTime": {
+                                  "type": "integer"
+                                },
+                                "updateTime": {
+                                  "type": "integer"
+                                },
+                                "user_id": {
+                                  "type": "string"
+                                },
+                                "nick_name": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "avatar": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "createTime",
+                                "updateTime",
+                                "user_id",
+                                "nick_name",
+                                "name",
+                                "avatar",
+                                "id"
+                              ],
+                              "x-apifox-orders": [
+                                "createTime",
+                                "updateTime",
+                                "user_id",
+                                "nick_name",
+                                "name",
+                                "avatar",
+                                "id"
+                              ],
+                              "x-apifox-ignore-properties": []
+                            },
+                            "description": "群成员列表"
+                          },
+                          "black_id": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "description": "黑名单人员ids"
+                          },
+                          "remark": {
+                            "type": "string",
+                            "description": "最新群公告"
+                          },
+                          "type": {
+                            "type": "integer",
+                            "description": "群类型"
+                          },
+                          "status": {
+                            "type": "integer",
+                            "description": "状态"
+                          },
+                          "newsContent": {
+                            "type": "string",
+                            "description": "最新群消息"
+                          },
+                          "newsContentTime": {
+                            "type": "integer",
+                            "description": "最新群消息时间戳"
+                          },
+                          "newCount": {
+                            "type": "integer",
+                            "description": "未读消息数"
+                          },
+                          "id": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "newsContentTime",
+                          "newsContent",
+                          "createTime",
+                          "updateTime",
+                          "name",
+                          "avatar",
+                          "user_id",
+                          "admin_user_id",
+                          "user_child_list",
+                          "black_id",
+                          "remark",
+                          "type",
+                          "status",
+                          "newCount",
+                          "id"
+                        ],
+                        "x-apifox-orders": [
+                          "createTime",
+                          "updateTime",
+                          "name",
+                          "avatar",
+                          "user_id",
+                          "admin_user_id",
+                          "user_child_list",
+                          "black_id",
+                          "remark",
+                          "type",
+                          "status",
+                          "newsContent",
+                          "newsContentTime",
+                          "newCount",
+                          "id"
+                        ],
+                        "x-apifox-ignore-properties": []
+                      }
+                    },
+                    "msg": {
+                      "type": "string"
+                    },
+                    "newCounts": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg",
+                    "newCounts"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg",
+                    "newCounts"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": [
+                        {
+                          "createTime": 1672745909223,
+                          "updateTime": 1672745909223,
+                          "name": "2222",
+                          "avatar": "asdas",
+                          "user_id": "1",
+                          "admin_user_id": [
+                            "2",
+                            "3"
+                          ],
+                          "user_child_list": [
+                            {
+                              "createTime": 1672745909222,
+                              "updateTime": 1672745909222,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b413b541879ae682da0677"
+                            },
+                            {
+                              "createTime": 1672745909222,
+                              "updateTime": 1672745909222,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b413b541879ae682da0678"
+                            },
+                            {
+                              "createTime": 1672745909222,
+                              "updateTime": 1672745909222,
+                              "user_id": "3",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b413b541879ae682da0679"
+                            },
+                            {
+                              "createTime": 1672745909222,
+                              "updateTime": 1672745909222,
+                              "user_id": "4",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b413b541879ae682da067a"
+                            },
+                            {
+                              "createTime": 1673505035866,
+                              "updateTime": 1673505035866,
+                              "user_id": "5",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfa90b2b0e4536db847dbb"
+                            },
+                            {
+                              "createTime": 1673505078482,
+                              "updateTime": 1673505078482,
+                              "user_id": "6",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfa9362b0e4536db847dc4"
+                            },
+                            {
+                              "createTime": 1673505165986,
+                              "updateTime": 1673505165986,
+                              "user_id": "7",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfa98d2b0e4536db847dce"
+                            },
+                            {
+                              "createTime": 1673505178580,
+                              "updateTime": 1673505178580,
+                              "user_id": "8",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfa99ac34eb379e7401e87"
+                            },
+                            {
+                              "createTime": 1673505291609,
+                              "updateTime": 1673505291609,
+                              "user_id": "9",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfaa0b36e6c807765accb8"
+                            },
+                            {
+                              "createTime": 1673506027739,
+                              "updateTime": 1673506027739,
+                              "user_id": "10",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfacebdd2cd72e030b2a87"
+                            },
+                            {
+                              "createTime": 1673506071313,
+                              "updateTime": 1673506071313,
+                              "user_id": "11",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfad17dd2cd72e030b2a94"
+                            },
+                            {
+                              "createTime": 1673507867635,
+                              "updateTime": 1673507867635,
+                              "user_id": "22",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfb41b0e8f0665e3ca31fd"
+                            }
+                          ],
+                          "black_id": [
+                            "2"
+                          ],
+                          "remark": "头哥是菜鸡2",
+                          "type": 1,
+                          "status": 0,
+                          "__v": 0,
+                          "newsContent": "头哥无敌",
+                          "newsContentTime": 1673507148110,
+                          "newCount": 8,
+                          "id": "63b413b541879ae682da0676"
+                        },
+                        {
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "createTime": 1672746625898,
+                          "updateTime": 1672746625898,
+                          "name": "大垃圾",
+                          "avatar": "",
+                          "user_id": "3",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1672746625898,
+                              "updateTime": 1672746625898,
+                              "user_id": "3",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b416819c0289ed7b5f0f8c"
+                            },
+                            {
+                              "createTime": 1672746625898,
+                              "updateTime": 1672746625898,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b416819c0289ed7b5f0f8d"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 0,
+                          "status": 0,
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63b416819c0289ed7b5f0f8b"
+                        },
+                        {
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "createTime": 1672751475996,
+                          "updateTime": 1672751475996,
+                          "name": "大垃圾",
+                          "avatar": "",
+                          "user_id": "1",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1672751475996,
+                              "updateTime": 1672751475996,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b42973278bde9e016e50a3"
+                            },
+                            {
+                              "createTime": 1672751475996,
+                              "updateTime": 1672751475996,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63b42974278bde9e016e50a4"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 0,
+                          "status": 0,
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63b42973278bde9e016e50a2"
+                        },
+                        {
+                          "createTime": 1673411620212,
+                          "updateTime": 1673411620212,
+                          "name": "hahah",
+                          "avatar": "sdas",
+                          "user_id": "1",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1673411620212,
+                              "updateTime": 1673411620212,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be3c247cd4dd3e129f5588"
+                            },
+                            {
+                              "createTime": 1673411620212,
+                              "updateTime": 1673411620212,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be3c247cd4dd3e129f5589"
+                            },
+                            {
+                              "createTime": 1673411620212,
+                              "updateTime": 1673411620212,
+                              "user_id": "3",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63be3c247cd4dd3e129f558a"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 1,
+                          "status": 0,
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63be3c247cd4dd3e129f5587"
+                        },
+                        {
+                          "createTime": 1673506640668,
+                          "updateTime": 1673506640668,
+                          "name": "大垃圾",
+                          "avatar": "",
+                          "user_id": "2",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1673506640668,
+                              "updateTime": 1673506640668,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfaf5025e8fff9f7a3cddb"
+                            },
+                            {
+                              "createTime": 1673506640668,
+                              "updateTime": 1673506640668,
+                              "user_id": "4",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfaf5025e8fff9f7a3cddc"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 0,
+                          "status": 0,
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63bfaf5025e8fff9f7a3cdda"
+                        },
+                        {
+                          "createTime": 1673506783180,
+                          "updateTime": 1673506783180,
+                          "name": "大垃圾",
+                          "avatar": "",
+                          "user_id": "2",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1673506783180,
+                              "updateTime": 1673506783180,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfafdf8da65ba5c1a8f477"
+                            },
+                            {
+                              "createTime": 1673506783180,
+                              "updateTime": 1673506783180,
+                              "user_id": "13",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfafdf8da65ba5c1a8f478"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 0,
+                          "status": 0,
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63bfafdf8da65ba5c1a8f476"
+                        },
+                        {
+                          "createTime": 1673507400546,
+                          "updateTime": 1673507400546,
+                          "name": "群名字",
+                          "avatar": "群头像",
+                          "user_id": "2",
+                          "admin_user_id": [],
+                          "user_child_list": [
+                            {
+                              "createTime": 1673507400545,
+                              "updateTime": 1673507400545,
+                              "user_id": "1",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfb2480e8f0665e3ca31d0"
+                            },
+                            {
+                              "createTime": 1673507400545,
+                              "updateTime": 1673507400545,
+                              "user_id": "2",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfb2480e8f0665e3ca31d1"
+                            },
+                            {
+                              "createTime": 1673507400545,
+                              "updateTime": 1673507400545,
+                              "user_id": "3",
+                              "nick_name": "大垃圾",
+                              "name": "大垃圾",
+                              "avatar": "头像",
+                              "id": "63bfb2480e8f0665e3ca31d2"
+                            }
+                          ],
+                          "black_id": [],
+                          "remark": "",
+                          "type": 1,
+                          "status": 0,
+                          "newsContentTime": 0,
+                          "newsContent": "",
+                          "__v": 0,
+                          "newCount": 0,
+                          "id": "63bfb2480e8f0665e3ca31cf"
+                        }
+                      ],
+                      "msg": "请求成功",
+                      "newCounts": 8
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-57942272-run"
+      }
+    },
+    "/api/group/getGroupData": {
+      "get": {
+        "summary": "获取群组信息",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "群组id",
+            "required": true,
+            "example": "63b413b541879ae682da0676",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58099727-run"
+      }
+    },
+    "/api/group/getRemarkData": {
+      "get": {
+        "summary": "获取群公告详情",
+        "x-apifox-folder": "群组/群公告",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群公告"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "公告id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "createTime": {
+                          "type": "integer"
+                        },
+                        "updateTime": {
+                          "type": "integer"
+                        },
+                        "groupId": {
+                          "type": "string",
+                          "description": "群组id"
+                        },
+                        "remark": {
+                          "type": "string",
+                          "description": "公告内容"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "description": "创建人id"
+                        },
+                        "user_child_list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "integer"
+                              },
+                              "updateTime": {
+                                "type": "integer"
+                              },
+                              "user_id": {
+                                "type": "string"
+                              },
+                              "nick_name": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "avatar": {
+                                "type": "string"
+                              },
+                              "id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "createTime",
+                              "updateTime",
+                              "user_id",
+                              "nick_name",
+                              "name",
+                              "avatar",
+                              "id"
+                            ],
+                            "x-apifox-orders": [
+                              "createTime",
+                              "updateTime",
+                              "user_id",
+                              "nick_name",
+                              "name",
+                              "avatar",
+                              "id"
+                            ],
+                            "x-apifox-ignore-properties": []
+                          },
+                          "description": "已读人员列表"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "createTime",
+                        "updateTime",
+                        "groupId",
+                        "remark",
+                        "user_id",
+                        "user_child_list",
+                        "id"
+                      ],
+                      "x-apifox-orders": [
+                        "createTime",
+                        "updateTime",
+                        "groupId",
+                        "remark",
+                        "user_id",
+                        "user_child_list",
+                        "id"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "createTime": 1673421227869,
+                        "updateTime": 1673421227869,
+                        "groupId": "63b413b541879ae682da0676",
+                        "remark": "头哥是菜鸡2",
+                        "user_id": "1",
+                        "user_child_list": [
+                          {
+                            "createTime": 1673421239741,
+                            "updateTime": 1673421239742,
+                            "user_id": "1",
+                            "nick_name": "大垃圾",
+                            "name": "大垃圾",
+                            "avatar": "头像",
+                            "id": "63be61b7fbc19f5910a44685"
+                          },
+                          {
+                            "createTime": 1673421251135,
+                            "updateTime": 1673421251135,
+                            "user_id": "2",
+                            "nick_name": "大垃圾",
+                            "name": "大垃圾",
+                            "avatar": "头像",
+                            "id": "63be61c3fbc19f5910a44697"
+                          }
+                        ],
+                        "id": "63be61abfbc19f5910a4467a"
+                      },
+                      "msg": "请求成功"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58121365-run"
+      }
+    },
+    "/api/group/groupSetEstoppel": {
+      "post": {
+        "summary": "设置群禁言",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "time": 1673949941945,
+                        "user_id": "2",
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupAddEstoppel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58150535-run"
+      }
+    },
+    "/api/group/groupDelEstoppel": {
+      "post": {
+        "summary": "取消群禁言",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "time": 1673949961170,
+                        "user_id": "2",
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupDelEstoppel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58150861-run"
+      }
+    },
+    "/api/group/groupSetUserEstoppel": {
+      "post": {
+        "summary": "设置群成员禁言",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "user_from_id": {
+                    "type": "string",
+                    "description": "要禁言的userid"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_from_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "time": 1673949373244,
+                        "user_id": "2",
+                        "user_from_id": "5",
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "userFormData": {
+                          "user_id": "5",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupAddUserEstoppel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58157214-run"
+      }
+    },
+    "/api/group/groupDelUserEstoppel": {
+      "post": {
+        "summary": "取消群成员禁言",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "user_from_id": {
+                    "type": "string",
+                    "description": "要禁言的userid"
+                  }
+                },
+                "required": [
+                  "id",
+                  "user_from_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "time": 1673949441741,
+                        "user_id": "2",
+                        "user_from_id": "5",
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "userFormData": {
+                          "user_id": "5",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupDelUserEstoppel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58161381-run"
+      }
+    },
+    "/api/group/shareGroup": {
+      "post": {
+        "summary": "邀请人加入群二维码数据",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  },
+                  "overtime": {
+                    "type": "string",
+                    "description": "超时时间 默认7200000（两小时）单位：毫秒",
+                    "example": "7200000"
+                  },
+                  "remark": {
+                    "type": "string",
+                    "description": "邀请备注"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "createTime": {
+                          "type": "integer"
+                        },
+                        "updateTime": {
+                          "type": "integer"
+                        },
+                        "user_id": {
+                          "type": "string"
+                        },
+                        "groupId": {
+                          "type": "string"
+                        },
+                        "remark": {
+                          "type": "string",
+                          "description": "邀请备注"
+                        },
+                        "overtime": {
+                          "type": "integer",
+                          "description": "超时时间戳 毫秒"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "createTime",
+                        "updateTime",
+                        "user_id",
+                        "groupId",
+                        "remark",
+                        "overtime",
+                        "id"
+                      ],
+                      "x-apifox-orders": [
+                        "createTime",
+                        "updateTime",
+                        "user_id",
+                        "groupId",
+                        "remark",
+                        "overtime",
+                        "id"
+                      ],
+                      "x-apifox-ignore-properties": []
+                    },
+                    "msg": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-orders": [
+                    "code",
+                    "data",
+                    "msg"
+                  ],
+                  "x-apifox-ignore-properties": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "成功示例 ",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "createTime": 1673507803915,
+                        "updateTime": 1673507803915,
+                        "user_id": "2",
+                        "groupId": "63b413b541879ae682da0676",
+                        "remark": "打的撒多",
+                        "overtime": 7200000,
+                        "id": "63bfb3db0e8f0665e3ca31e1"
+                      },
+                      "msg": "请求成功"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58169355-run"
+      }
+    },
+    "/api/group/shareGroupAddUser": {
+      "post": {
+        "summary": "扫码进群",
+        "x-apifox-folder": "群组/群成员",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组/群成员"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "邀请二维码数据id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63b413b541879ae682da0676",
+                        "user_id": "222",
+                        "userData": {
+                          "user_id": "222",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        },
+                        "time": 1673949516963
+                      },
+                      "sendType": "groupAddUser"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58300361-run"
+      }
+    },
+    "/api/group/delGroup": {
+      "post": {
+        "summary": "解散群组",
+        "x-apifox-folder": "群组",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "群组"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "user_id": "2",
+                        "groupId": "63c673cb2f8a58c190915b41",
+                        "time": 1673950197062,
+                        "userData": {
+                          "user_id": "2",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "groupDel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58845807-run"
+      }
+    },
+    "/api/mail/delMail": {
+      "post": {
+        "summary": "删除好友关系",
+        "x-apifox-folder": "好友",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "好友"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "",
+            "required": true,
+            "example": "2",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "群组id"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {},
+                  "x-apifox-ignore-properties": [],
+                  "x-apifox-orders": []
+                },
+                "examples": {
+                  "1": {
+                    "summary": "ws",
+                    "value": {
+                      "code": 1,
+                      "data": {
+                        "groupId": "63c75bc38f513580430d4b91",
+                        "time": 1674009799137,
+                        "user_id": "aaaa",
+                        "userData": {
+                          "user_id": "aaaa",
+                          "name": "大垃圾",
+                          "avatar": "头像"
+                        }
+                      },
+                      "sendType": "mailDel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1921466/apis/api-58851365-run"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:29998",
+      "description": "测试环境"
+    },
+    {
+      "url": "http://192.168.88.130:29999",
+      "description": "正式环境"
+    },
+    {
+      "url": "http://192.168.88.128:29999",
+      "description": "虚拟机环境"
+    },
+    {
+      "url": "ws//192.168.88.128:29999",
+      "description": "虚拟机ws环境"
+    }
+  ]
+}
